@@ -1,7 +1,8 @@
-# Apache Kafka example for Spring Boot
+# Apache Kafka example for Spring Boot with Tweeter API
 
-Example code for connecting to a Apache Kafka cluster and authenticate with SASL/SCRAM based on https://github.com/spring-projects/spring-boot/tree/master/spring-boot-samples/spring-boot-sample-kafka
+Example code for connecting to a Apache Kafka and produce messages from 5 different Tweets topics into 5 different file in real time.
 
+Possible to run this example on cluster and authenticate with SASL/SCRAM based on https://github.com/spring-projects/spring-boot/tree/master/spring-boot-samples/spring-boot-sample-kafka
 To quickly test this example you can create a free Apache Kafka instance at https://www.cloudkarafka.com
 
 ## Running locally
@@ -18,6 +19,7 @@ and the credentials for authentication.
 Here is an example of the properties file
 ```
 spring.kafka.bootstrap-servers=${CLOUDKARAFKA_BROKERS:velomobile-01.srvs.cloudkafka.com:9094,velomobile-02.srvs.cloudkafka.com:9094,velomobile-03.srvs.cloudkafka.com:9094}
+#Use these options only if you want to secure Kafka server
 spring.kafka.properties.security.protocol=SASL_SSL
 spring.kafka.properties.sasl.mechanism=SCRAM-SHA-256
 spring.kafka.properties.sasl.jaas.config=org.apache.kafka.common.security.scram.ScramLoginModule required username="${CLOUDKARAFKA_USERNAME}" password="${CLOUDKARAFKA_PASSWORD}";
@@ -41,9 +43,15 @@ If you are running a dedicated plan on CloudKarafka or have your own server, you
 ### Run
 
 ```
-git clone https://github.com/CloudKarafka/springboot-kafka-example.git
+git clone https://github.com/zeroprg/springboot-tweet-kafka-example.git
 cd springboot-kafka-example
-mvn spring-boot:run -DCLOUDKARAFKA_USERNAME=<USERNAME> -DCLOUDKARAFKA_PASSWORD=<PASSWORD> -DCLOUDKARAFKA_BROKERS=<BROKERS>
-```
+mvn spring-boot:run -DCLOUDKARAFKA_USERNAME=vitaly #-DCLOUDKARAFKA_BROKERS=localhost:9092
+# Only if you specify security on Kafka server add this additional parameter
+-DCLOUDKARAFKA_PASSWORD=localhost:9092
 
-It will first produce 20 messages and then start the consumer which will print out the messages.
+```
+It will produce the messages from 5 different Tweeter's topics and populate 5 different files with different tweets .
+
+```
+How to setup to configure and run Kafka server use this URL: https://www.sohamkamani.com/blog/2017/11/22/how-to-install-and-run-kafka/
+

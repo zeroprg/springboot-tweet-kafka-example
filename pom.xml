@@ -2,15 +2,37 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<!-- Your own application should inherit from spring-boot-starter-parent -->
+	<!--<parent>
+		&lt;!&ndash; Your own application should inherit from spring-boot-starter-parent &ndash;&gt;
 		<artifactId>spring-boot-samples</artifactId>
 		<groupId>org.springframework.boot</groupId>
 		<version>${revision}</version>
+	</parent>-->
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.1.6.RELEASE</version>
+		<relativePath/>
+		<!-- lookup parent from repository -->
 	</parent>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<!-- Import dependency management from Spring Boot -->
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-dependencies</artifactId>
+				<version>2.1.3.RELEASE</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
 	<artifactId>spring-boot-sample-kafka</artifactId>
-	<name>Spring Boot Kafka Sample</name>
-	<description>Spring Boot Kafka Sample</description>
+	<name>Spring Boot Kafka Tweets reader Sample</name>
+	<description>Spring Boot Kafka Sample with Tweeter API</description>
 	<properties>
 		<main.basedir>${basedir}/../..</main.basedir>
 	</properties>
