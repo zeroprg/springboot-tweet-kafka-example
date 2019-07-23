@@ -20,18 +20,18 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class SampleMessage {
 
-    private final Integer id;
+    private final Long id;
 
     private final String message;
 
     @JsonCreator
-    public SampleMessage(@JsonProperty("id") Integer id,
+    public SampleMessage(@JsonProperty("id") Long id,
                          @JsonProperty("message") String message) {
         this.id = id;
         this.message = message;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return this.id;
     }
 
