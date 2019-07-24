@@ -55,13 +55,13 @@ public class TwitterMessageProducer extends MessageProducerSupport {
     public void setTerms(List<String> terms) {
         this.terms = terms;
     }
-    StatusListener getStatusListener() {
+    public StatusListener getStatusListener() {
         return statusListener;
     }
     FilterQuery getFilterQuery() {
         return filterQuery;
     }
-    class StatusListener extends StatusAdapter {
+    public class StatusListener extends StatusAdapter {
         @Override
         public void onStatus(Status status) {
             sendMessage(MessageBuilder.withPayload(status).build());
