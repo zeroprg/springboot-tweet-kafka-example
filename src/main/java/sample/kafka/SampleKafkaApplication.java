@@ -29,18 +29,14 @@ import twitter4j.TwitterStream;
 
 @SpringBootApplication
 public class SampleKafkaApplication {
-    @Autowired
-    private TwitterMessageProducer twitterMessageProducer;
-    @Autowired
-    private PollableChannel outputChannel;
-    @Autowired
-    private TwitterStream twitterStream;
 
     public static void main(String[] args) {
         SpringApplication.run(SampleKafkaApplication.class, args);
     }
 
-
+/* Use this if you want to test Kafka producer separately from Tweet producer
+   Kafka producer send messages in TwitterConfig.twitterFlow
+ */
     @Bean
     public ApplicationRunner runner(Producer producer) {
         return (args) -> {
@@ -50,19 +46,5 @@ public class SampleKafkaApplication {
         };
     }
 
-    /*
-@Bean
-public ApplicationRunner runner(Producer producer) {
-    return (args) -> {
-
-        TwitterMessageProducer twitterProducer = new TwitterMessageProducer(twitterStream, outputChannel);
-        twitterProducer.doStart();
-
-        TwitterMessageProducer.StatusListener statusListener = twitterMessageProducer.getStatusListener();
-      //  Status status = mock(Status.class);
-        //statusListener.onStatus(status);
-        Message<?> statusMessage = outputChannel.receive();
-    };
-*/
 
 }
