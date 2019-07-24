@@ -20,8 +20,8 @@ Here is an example of the properties file
 ```
 spring.kafka.bootstrap-servers=${CLOUDKARAFKA_BROKERS:velomobile-01.srvs.cloudkafka.com:9094,velomobile-02.srvs.cloudkafka.com:9094,velomobile-03.srvs.cloudkafka.com:9094}
 #Use these options only if you want to secure Kafka server
-spring.kafka.properties.security.protocol=SASL_SSL
-spring.kafka.properties.sasl.mechanism=SCRAM-SHA-256
+#spring.kafka.properties.security.protocol=SASL_SSL
+#spring.kafka.properties.sasl.mechanism=SCRAM-SHA-256
 spring.kafka.properties.sasl.jaas.config=org.apache.kafka.common.security.scram.ScramLoginModule required username="${CLOUDKARAFKA_USERNAME}" password="${CLOUDKARAFKA_PASSWORD}";
 spring.kafka.consumer.group-id=${CLOUDKARAFKA_USERNAME}-consumers
 
@@ -44,14 +44,21 @@ If you are running a dedicated plan on CloudKarafka or have your own server, you
 
 ```
 git clone https://github.com/zeroprg/springboot-tweet-kafka-example.git
-cd springboot-kafka-example
+cd springboot-tweet-kafka-example
 mvn spring-boot:run -DCLOUDKARAFKA_USERNAME=vitaly #-DCLOUDKARAFKA_BROKERS=localhost:9092
 # Only if you specify security on Kafka server add this additional parameter
 -DCLOUDKARAFKA_PASSWORD=localhost:9092
 
-```
-It will produce the messages from 5 different Tweeter's topics and populate 5 different files with different tweets .
 
+It will produce the messages from 5 different Tweeter's topics ('microservices','springcloud','kafka','twitter stream API','springCloud') and populate 5 different files with different tweets  .
 ```
+#Twitters embedded properties
+debug=true
+oauth.consumerKey=r1wFskT3q
+oauth.consumerSecret=fBbmp71HKbqalpizIwwwkBpKC
+oauth.accessToken=298FPfE16frABXMcRIn7aUSSnNneMEPrUuZ
+oauth.accessTokenSecret=1LMNZZIfrAimpD004QilV1pH3PYTvM
+twitter.topics=microservices,springcloud,kafka,twitter stream API,springCloud
+
 How to setup to configure and run Kafka server use this URL: https://www.sohamkamani.com/blog/2017/11/22/how-to-install-and-run-kafka/
 
