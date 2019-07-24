@@ -31,7 +31,7 @@ public class SampleKafkaApplication {
     @Bean
     public ApplicationRunner runner(Producer producer) {
         return (args) -> {
-            for(int i = 1; i < 20; i++) {
+            for(long i = 1; i < 20; i++) {
                     producer.send(new SampleMessage(i, "A simple test message"));
             }
         };

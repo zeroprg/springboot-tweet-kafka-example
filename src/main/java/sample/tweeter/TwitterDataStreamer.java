@@ -1,13 +1,16 @@
-package sample.kafka;
+package sample.tweeter;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import sample.kafka.Producer;
+import sample.kafka.SampleMessage;
 import twitter4j.*;
+import twitter4j.TwitterStreamFactory;
 import twitter4j.conf.ConfigurationBuilder;
 
 
-public class TwitterData {
+public class TwitterDataStreamer {
 
     /** The actual Twitter stream. It's set up to collect raw JSON data */
 
