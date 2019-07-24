@@ -9,7 +9,9 @@ import twitter4j.*;
 import twitter4j.TwitterStreamFactory;
 import twitter4j.conf.ConfigurationBuilder;
 
-
+/**
+ *  This is example of stand alone TwitterDataStreamer
+ */
 public class TwitterDataStreamer {
 
     /** The actual Twitter stream. It's set up to collect raw JSON data */
@@ -45,7 +47,7 @@ public class TwitterDataStreamer {
             public void onStatus(Status status) {
                 System.out.println("@" + status.getUser().getScreenName() + " - " + status.getText());
                 // send the data to kafka
-                producer.send(new SampleMessage(status.getId(), status.getText()));
+                producer.send(new SampleMessage(Long.toString(status.getId()), status.getText()));
             }
 
             @Override

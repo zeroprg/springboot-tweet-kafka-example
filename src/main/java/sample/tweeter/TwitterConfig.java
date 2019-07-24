@@ -54,14 +54,19 @@ public class TwitterConfig {
 
 
     /**
-     *  Finally flow itself
+     *  Finally flow itself:
+     *  Read tweet message from outputChannel and send it to kafkaProducer
+     *
      * **/
     @Bean
-    IntegrationFlow twitterFlow(MessageChannel outputChannel) {
+    IntegrationFlow twitterFlow(MessageChannel outputChannel, Producer kafkaProducer) {
 
         return IntegrationFlows.from(outputChannel)
                 .transform(Status::getText)
-                .handle(m -> { String mesg = m.getPayload().toString(); log.info(mesg);})
+                .handle(m -> {
+                    String mesg = m.getPayload().toString();
+                    log.info(mesg);
+                    kafkaProducer.send(new SampleMessage(m.getHeaders().getId().toString(), mesg));})
                 .get();
     }
 }

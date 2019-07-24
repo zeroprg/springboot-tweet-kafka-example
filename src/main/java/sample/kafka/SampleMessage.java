@@ -18,20 +18,22 @@ package sample.kafka;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.UUID;
+
 public class SampleMessage {
 
-    private final Long id;
+    private final String id;
 
     private final String message;
 
     @JsonCreator
-    public SampleMessage(@JsonProperty("id") Long id,
+    public SampleMessage(@JsonProperty("id") String id,
                          @JsonProperty("message") String message) {
         this.id = id;
         this.message = message;
     }
 
-    public Long getId() {
+    public String getId() {
         return this.id;
     }
 

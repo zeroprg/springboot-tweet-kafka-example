@@ -36,7 +36,7 @@ public class SampleKafkaApplication {
 
 /* Use this if you want to test Kafka producer separately from Tweet producer
    Kafka producer send messages in TwitterConfig.twitterFlow
- */
+
     @Bean
     public ApplicationRunner runner(Producer producer) {
         return (args) -> {
@@ -46,5 +46,5 @@ public class SampleKafkaApplication {
         };
     }
 
-
+ */
 }
