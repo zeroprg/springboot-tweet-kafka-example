@@ -16,17 +16,30 @@
 
 package sample.kafka;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.messaging.Message;
+import org.springframework.messaging.PollableChannel;
+import sample.tweeter.TwitterMessageProducer;
+import twitter4j.Status;
+import twitter4j.TwitterStream;
 
 @SpringBootApplication
 public class SampleKafkaApplication {
+    @Autowired
+    private TwitterMessageProducer twitterMessageProducer;
+    @Autowired
+    private PollableChannel outputChannel;
+    @Autowired
+    private TwitterStream twitterStream;
 
     public static void main(String[] args) {
         SpringApplication.run(SampleKafkaApplication.class, args);
     }
+
 
     @Bean
     public ApplicationRunner runner(Producer producer) {
@@ -36,5 +49,20 @@ public class SampleKafkaApplication {
             }
         };
     }
+
+    /*
+@Bean
+public ApplicationRunner runner(Producer producer) {
+    return (args) -> {
+
+        TwitterMessageProducer twitterProducer = new TwitterMessageProducer(twitterStream, outputChannel);
+        twitterProducer.doStart();
+
+        TwitterMessageProducer.StatusListener statusListener = twitterMessageProducer.getStatusListener();
+      //  Status status = mock(Status.class);
+        //statusListener.onStatus(status);
+        Message<?> statusMessage = outputChannel.receive();
+    };
+*/
 
 }
